@@ -1,0 +1,34 @@
+digraph SmartCare {
+  rankdir=LR; nodesep=0.9; ranksep=1.3;
+  node [shape=plain, fontname="Helvetica", fontsize=11];
+  edge [fontname="Helvetica", fontsize=11, arrowhead=none];
+
+  Patient [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Patient</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- patient_id<BR ALIGN="LEFT"/>- name<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ matches_id(patient_id)<BR ALIGN="LEFT"/>+ matches_name(text)<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Practitioner [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Practitioner</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- practitioner_id<BR ALIGN="LEFT"/>- name<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ matches_id(practitioner_id)<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Appointment [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Appointment</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- appointment_id<BR ALIGN="LEFT"/>- date<BR ALIGN="LEFT"/>- time<BR ALIGN="LEFT"/>- status : AppointmentStatus<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ is_active()<BR ALIGN="LEFT"/>+ conflicts_with(other)<BR ALIGN="LEFT"/>+ change_status(new_status)<BR ALIGN="LEFT"/>+ cancel()<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Status [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#fdf0c8">&laquo;enumeration&raquo;<BR/><B>AppointmentStatus</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">SCHEDULED<BR ALIGN="LEFT"/>COMPLETED<BR ALIGN="LEFT"/>CANCELLED<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Book [label=<<TABLE BORDER="1" STYLE="dashed" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#e3f3e3"><B>AppointmentBook</B><BR/>(optional)</TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- appointments<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ book(appointment)<BR ALIGN="LEFT"/>+ schedule_for(practitioner, date)<BR ALIGN="LEFT"/>+ history_for(patient)<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Patient -> Appointment [taillabel="1", headlabel="0..*", label="has", labeldistance=2.2];
+  Practitioner -> Appointment [taillabel="1", headlabel="0..*", label="attends", labeldistance=2.2];
+  Appointment -> Status [arrowhead=vee, style=dashed, label="status"];
+  Book -> Appointment [dir=both, arrowtail=odiamond, arrowhead=none, headlabel="0..*", label="holds", labeldistance=2.2];
+}
