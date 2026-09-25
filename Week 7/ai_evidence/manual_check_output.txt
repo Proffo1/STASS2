@@ -1,0 +1,15 @@
+1. Valid objects
+   Alice Smith / Dr John Doe (General Practice) / status Scheduled
+2. Invalid input
+Patient with blank name                          -> ValueError: Patient name cannot be empty
+Patient with name=None                           -> TypeError: Patient name must be text, not NoneType
+Practitioner with blank specialty                -> ValueError: Specialty cannot be empty
+Appointment with patient=None                    -> TypeError: patient must be a Patient
+Appointment with date as a string                -> TypeError: date must be a datetime.date
+3. Cancel a scheduled appointment
+   status now Cancelled, still an object, active = False
+4. Illegal repeated transition
+Cancel an already-cancelled appointment          -> InvalidStatusTransitionError: Cannot change status from Cancelled to Cancelled
+Change Cancelled to Completed                    -> InvalidStatusTransitionError: Cannot change status from Cancelled to Completed
+5. Direct mutation is blocked
+a.status = SCHEDULED                             -> AttributeError: property 'status' of 'Appointment' object has no setter

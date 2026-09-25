@@ -1,0 +1,36 @@
+digraph SmartCare04 {
+  rankdir=LR; nodesep=0.9; ranksep=1.3;
+  node [shape=plain, fontname="Helvetica", fontsize=11];
+  edge [fontname="Helvetica", fontsize=11, arrowhead=none];
+
+  Patient [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Patient</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- patient_id : str {readOnly}<BR ALIGN="LEFT"/>- name : str {readOnly}<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ matches_id(patient_id) : bool<BR ALIGN="LEFT"/>+ matches_name(text) : bool<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Practitioner [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Practitioner</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- practitioner_id : str {readOnly}<BR ALIGN="LEFT"/>- name : str {readOnly}<BR ALIGN="LEFT"/><B>- specialty : str {readOnly}  (NEW)</B><BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ matches_id(practitioner_id) : bool<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Appointment [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#dbe9f7"><B>Appointment</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">- appointment_id : str {readOnly}<BR ALIGN="LEFT"/>- date : date {readOnly}<BR ALIGN="LEFT"/>- time : time {readOnly}<BR ALIGN="LEFT"/>- status : AppointmentStatus {readOnly}<BR ALIGN="LEFT"/></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">+ is_active() : bool<BR ALIGN="LEFT"/>+ conflicts_with(other) : bool<BR ALIGN="LEFT"/>+ change_status(new_status)<BR ALIGN="LEFT"/>+ cancel()<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Status [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#fdf0c8">&laquo;enumeration&raquo;<BR/><B>AppointmentStatus</B></TD></TR><HR/>
+    <TR><TD ALIGN="LEFT">SCHEDULED<BR ALIGN="LEFT"/>COMPLETED<BR ALIGN="LEFT"/>CANCELLED<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+  Err [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#fdf0c8"><B>InvalidStatusTransitionError</B><BR/>(Exception)  <B>(NEW)</B></TD></TR></TABLE>>];
+
+  Book [label=<<TABLE BORDER="1" STYLE="dashed" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+    <TR><TD BGCOLOR="#eeeeee"><B>AppointmentBook</B><BR/>(designed, not implemented in Stage 4)</TD></TR></TABLE>>];
+
+  Patient -> Appointment [taillabel="1", headlabel="0..*", label="has", labeldistance=2.2];
+  Practitioner -> Appointment [taillabel="1", headlabel="0..*", label="attends", labeldistance=2.2];
+  Appointment -> Status [arrowhead=vee, style=dashed, label="status"];
+  Appointment -> Err [arrowhead=vee, style=dashed, label="raises"];
+  Book -> Appointment [dir=both, arrowtail=odiamond, arrowhead=none, headlabel="0..*", style=dashed, labeldistance=2.2];
+}

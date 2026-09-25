@@ -1,0 +1,31 @@
+test_bad_date_and_time (tests.test_domain.AppointmentTests.test_bad_date_and_time) ... ok
+test_bad_patient (tests.test_domain.AppointmentTests.test_bad_patient) ... ok
+test_bad_practitioner (tests.test_domain.AppointmentTests.test_bad_practitioner) ... ok
+test_blank_id (tests.test_domain.AppointmentTests.test_blank_id) ... ok
+test_cancel_scheduled (tests.test_domain.AppointmentTests.test_cancel_scheduled) ... ok
+test_cancelled_cannot_be_completed (tests.test_domain.AppointmentTests.test_cancelled_cannot_be_completed) ... ok
+test_cancelled_does_not_conflict (tests.test_domain.AppointmentTests.test_cancelled_does_not_conflict) ... ok
+test_complete_then_cancel_illegal (tests.test_domain.AppointmentTests.test_complete_then_cancel_illegal) ... ok
+test_conflict_same_practitioner_date_time (tests.test_domain.AppointmentTests.test_conflict_same_practitioner_date_time) ... ok
+test_new_is_scheduled_and_active (tests.test_domain.AppointmentTests.test_new_is_scheduled_and_active) ... ok
+test_no_conflict_different_time_or_practitioner (tests.test_domain.AppointmentTests.test_no_conflict_different_time_or_practitioner) ... ok
+test_no_conflict_with_itself (tests.test_domain.AppointmentTests.test_no_conflict_with_itself) ... ok
+test_repeated_cancel_is_illegal (tests.test_domain.AppointmentTests.test_repeated_cancel_is_illegal) ... ok
+test_status_is_read_only (tests.test_domain.AppointmentTests.test_status_is_read_only) ... ok
+test_string_status_rejected (tests.test_domain.AppointmentTests.test_string_status_rejected) ... ok
+test_blank_id (tests.test_domain.PatientTests.test_blank_id) ... ok
+test_blank_name (tests.test_domain.PatientTests.test_blank_name) ... ok
+test_matching (tests.test_domain.PatientTests.test_matching) ... ok
+test_none_name (tests.test_domain.PatientTests.test_none_name) ... ok
+test_read_only (tests.test_domain.PatientTests.test_read_only) ... ok
+test_valid (tests.test_domain.PatientTests.test_valid) ... ok
+test_blank_name (tests.test_domain.PractitionerTests.test_blank_name) ... ok
+test_blank_specialty (tests.test_domain.PractitionerTests.test_blank_specialty) ... ok
+test_matches_id (tests.test_domain.PractitionerTests.test_matches_id) ... ok
+test_none_id (tests.test_domain.PractitionerTests.test_none_id) ... ok
+test_valid (tests.test_domain.PractitionerTests.test_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.001s
+
+OK
