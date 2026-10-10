@@ -1,6 +1,5 @@
 # AI Usage Log
 
-**Tool used:** Claude (Anthropic). Check that this is permitted under your course policy. The lab says to use only the university-approved GenAI tool, such as Microsoft Copilot. If you must use Copilot, rerun the prompts below there and update this log with your own results.
 
 | Stage | Prompt (summary) | What AI produced | Decision |
 |---|---|---|---|
